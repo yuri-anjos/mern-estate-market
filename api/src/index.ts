@@ -1,6 +1,7 @@
-import express, { Request, Response } from "express";
+import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
+import { userRouter } from "./routes";
 
 dotenv.config();
 
@@ -16,7 +17,11 @@ mongoose
 const port = 3000;
 const app = express();
 
-app.get("/", (req: Request, res: Response) => {
+app.use(express.json());
+
+app.use("/api/user", userRouter);
+
+app.get("/", (req, res) => {
 	res.send("Express + TypeScript Server");
 });
 
