@@ -1,4 +1,4 @@
-import express from "express";
+import express, { NextFunction, Request, Response } from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import { userRouter, authRouter } from "./routes";
@@ -24,6 +24,17 @@ app.use("/api/auth", authRouter);
 
 app.get("/", (req, res) => {
 	res.send("Express + TypeScript Server");
+});
+
+app.use((err: any, req: Request, res: Response, next: NextFunction) => {
+	const statusCode = err.statusCode || 500;
+	const message = err.message || "Internal Server Error";
+
+	return res.status(statusCode).json({
+		success: false,
+		statusCode,
+		message,
+	});
 });
 
 app.listen(port, () => {

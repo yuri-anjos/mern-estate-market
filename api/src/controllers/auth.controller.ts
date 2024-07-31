@@ -1,4 +1,4 @@
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import CreateUserDTO from "../dtos/create-user.dto";
 import { User } from "../models";
 import bcryptjs from "bcryptjs";
@@ -6,7 +6,7 @@ import bcryptjs from "bcryptjs";
 const SALT_ROUNDS = 10;
 
 export default class AuthController {
-	static async signup(req: Request<{}, {}, CreateUserDTO>, res: Response) {
+	static async signup(req: Request<{}, {}, CreateUserDTO>, res: Response, next: NextFunction) {
 		const { username, email, password, confirmPassword } = req.body;
 
 		if (password !== confirmPassword) {
@@ -14,13 +14,11 @@ export default class AuthController {
 		}
 
 		try {
-			// Hash Password
 			const hashedPassword = bcryptjs.hashSync(password, SALT_ROUNDS);
-
 			const newUser = await User.create({ username, email, password: hashedPassword });
 			return res.status(201).json(newUser);
 		} catch (error: any) {
-			return res.status(500).json({ message: "Error creating user", error: error.message });
+			return next(error);
 		}
 	}
 }
