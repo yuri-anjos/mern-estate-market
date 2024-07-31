@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import CreateUserDTO from "../dtos/create-user.dto";
+import SignupDTO from "../dtos/signup.dto";
 import { User } from "../models";
 import bcryptjs from "bcryptjs";
 import LoginDTO from "../dtos/login.dto";
@@ -9,7 +9,7 @@ import { createUserToken, getTokenExpirationDate } from "../utils/token.helper";
 const SALT_ROUNDS = 10;
 
 export default class AuthController {
-	static async signup(req: Request<{}, {}, CreateUserDTO>, res: Response, next: NextFunction) {
+	static async signup(req: Request<{}, {}, SignupDTO>, res: Response, next: NextFunction) {
 		const { username, email, password, confirmPassword } = req.body;
 
 		if (password !== confirmPassword) {

@@ -27,6 +27,7 @@ export default function Signup() {
 		e.preventDefault();
 
 		if (formData.password !== formData.confirmPassword) {
+			setError("Passwords do not match");
 			return;
 		}
 
@@ -45,7 +46,7 @@ export default function Signup() {
 			return;
 		}
 
-		navigate("/signin");
+		navigate("/");
 	}
 
 	return (
@@ -71,7 +72,7 @@ export default function Signup() {
 				<input
 					type="password"
 					className="border p-3 rounded-lg"
-					placeholder="********"
+					placeholder="Password..."
 					name="password"
 					value={formData.password}
 					onChange={handleChange}
@@ -79,7 +80,7 @@ export default function Signup() {
 				<input
 					type="password"
 					className="border p-3 rounded-lg"
-					placeholder="********"
+					placeholder="Confirm Password..."
 					name="confirmPassword"
 					value={formData.confirmPassword}
 					onChange={handleChange}
