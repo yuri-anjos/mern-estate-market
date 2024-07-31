@@ -17,7 +17,14 @@ const userSchema = new mongoose.Schema(
 			required: true,
 		},
 	},
-	{ timestamps: true }
+	{
+		timestamps: true,
+		toJSON: {
+			transform: (doc, ret) => {
+				delete ret.password;
+			},
+		},
+	}
 );
 
 const User = mongoose.model("User", userSchema);

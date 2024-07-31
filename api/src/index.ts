@@ -1,7 +1,7 @@
 import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
-import { userRouter } from "./routes";
+import { userRouter, authRouter } from "./routes";
 
 dotenv.config();
 
@@ -20,6 +20,7 @@ const app = express();
 app.use(express.json());
 
 app.use("/api/user", userRouter);
+app.use("/api/auth", authRouter);
 
 app.get("/", (req, res) => {
 	res.send("Express + TypeScript Server");
