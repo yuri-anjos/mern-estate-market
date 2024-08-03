@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { RootState } from "../redux/store";
 import { useDispatch, useSelector } from "react-redux";
 import { signFailure, signStart, signSuccess } from "../redux/user/userSlice";
 
@@ -9,7 +8,8 @@ interface SignInFormState {
 	password: string;
 }
 export default function Signin() {
-	const { loading, error } = useSelector((state: RootState) => state.user);
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	const { loading, error } = useSelector((state: any) => state.user);
 
 	// const [loading, setLoading] = useState<boolean>(false);
 	// const [error, setError] = useState<string | null>(null);
@@ -44,7 +44,7 @@ export default function Signin() {
 			return;
 		}
 
-		dispatch(signSuccess(data.message));
+		dispatch(signSuccess(data));
 		navigate("/");
 	}
 
