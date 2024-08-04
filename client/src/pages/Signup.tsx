@@ -54,7 +54,7 @@ export default function Signup() {
 		if (data.success === false) {
 			// setLoading(false);
 			// setError(data.message);
-			dispatch(signFailure(data.message()));
+			dispatch(signFailure(data.message));
 			return;
 		}
 
