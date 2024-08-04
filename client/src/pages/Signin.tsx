@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { signFailure, signStart, signSuccess } from "../redux/user/userSlice";
+import { OAuthGoogle } from "../components";
 
 interface SignInFormState {
 	email: string;
@@ -78,12 +79,8 @@ export default function Signin() {
 				>
 					{loading ? "Loading..." : "Sign In"}
 				</button>
-				<button
-					type="button"
-					className="bg-red-700 text-white p-3 rounded-lg  hover:bg-red-800 disabled:opacity-60 disabled:cursor-not-allowed"
-				>
-					Continue with Google
-				</button>
+
+				<OAuthGoogle />
 			</form>
 			<p className="mt-5">
 				Dont have an account?{" "}

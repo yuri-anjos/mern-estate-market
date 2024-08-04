@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { OAuthGoogle } from "../components";
 
 interface SignUpFormState {
 	username: string;
@@ -95,12 +96,7 @@ export default function Signup() {
 				>
 					{loading ? "Loading..." : "Sign Up"}
 				</button>
-				<button
-					type="button"
-					className="bg-red-700 text-white p-3 rounded-lg  hover:bg-red-800 disabled:opacity-60 disabled:cursor-not-allowed"
-				>
-					Continue with Google
-				</button>
+				<OAuthGoogle />
 			</form>
 			<p className="mt-5">
 				Already have an account?{" "}
