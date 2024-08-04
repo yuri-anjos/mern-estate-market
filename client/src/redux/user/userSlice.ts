@@ -1,11 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 
-export interface UserState {
+export type UserState = {
 	currentUser: string | null;
 	error: string | null;
 	loading: boolean;
-}
+};
 
 const initialState: UserState = {
 	currentUser: null,

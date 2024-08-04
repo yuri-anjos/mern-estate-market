@@ -4,12 +4,12 @@ import { OAuthGoogle } from "../components";
 import { useDispatch, useSelector } from "react-redux";
 import { signFailure, signStart, signSuccess } from "../redux/user/userSlice";
 
-interface SignUpFormState {
+type SignUpFormState = {
 	username: string;
 	email: string;
 	password: string;
 	confirmPassword: string;
-}
+};
 
 const signUpInitialState: SignUpFormState = {
 	username: "",
