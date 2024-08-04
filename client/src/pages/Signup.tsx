@@ -104,7 +104,7 @@ export default function Signup() {
 				<button
 					type="submit"
 					disabled={loading}
-					className="bg-slate-700 text-white p-3 rounded-lg hover:bg-slate-800 disabled:opacity-60 disabled:cursor-not-allowed"
+					className="p-3 rounded-lg text-white bg-slate-700 hover:bg-slate-900 disabled:opacity-60 disabled:cursor-not-allowed duration-300"
 				>
 					{loading ? "Loading..." : "Sign Up"}
 				</button>
