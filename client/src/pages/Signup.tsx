@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { OAuthGoogle } from "../components";
+import { useDispatch, useSelector } from "react-redux";
+import { signFailure, signStart, signSuccess } from "../redux/user/userSlice";
 
 interface SignUpFormState {
 	username: string;
@@ -9,16 +11,22 @@ interface SignUpFormState {
 	confirmPassword: string;
 }
 
+const signUpInitialState: SignUpFormState = {
+	username: "",
+	email: "",
+	password: "",
+	confirmPassword: "",
+};
+
 export default function Signup() {
-	const [loading, setLoading] = useState<boolean>(false);
-	const [error, setError] = useState<string | null>(null);
-	const [formData, setFormData] = useState<SignUpFormState>({
-		username: "",
-		email: "",
-		password: "",
-		confirmPassword: "",
-	});
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	const { loading, error } = useSelector((state: any) => state.user);
+
+	// const [loading, setLoading] = useState<boolean>(false);
+	// const [error, setError] = useState<string | null>(null);
+	const [formData, setFormData] = useState<SignUpFormState>(signUpInitialState);
 	const navigate = useNavigate();
+	const dispatch = useDispatch();
 
 	function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
 		setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -28,11 +36,13 @@ export default function Signup() {
 		e.preventDefault();
 
 		if (formData.password !== formData.confirmPassword) {
-			setError("Passwords do not match");
+			dispatch(signFailure("Passwords do not match"));
+			// setError("Passwords do not match");
 			return;
 		}
 
-		setLoading(true);
+		dispatch(signStart());
+		// setLoading(true);
 		const res = await fetch("/api/auth/signup", {
 			method: "POST",
 			headers: { "Content-Type": "application/json" },
@@ -42,11 +52,13 @@ export default function Signup() {
 		const data = await res.json();
 
 		if (data.success === false) {
-			setLoading(false);
-			setError(data.message);
+			// setLoading(false);
+			// setError(data.message);
+			dispatch(signFailure(data.message()));
 			return;
 		}
 
+		dispatch(signSuccess(data));
 		navigate("/");
 	}
 

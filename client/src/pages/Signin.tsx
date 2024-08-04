@@ -8,16 +8,19 @@ interface SignInFormState {
 	email: string;
 	password: string;
 }
+
+const signInInitialState: SignInFormState = {
+	email: "",
+	password: "",
+};
+
 export default function Signin() {
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	const { loading, error } = useSelector((state: any) => state.user);
 
 	// const [loading, setLoading] = useState<boolean>(false);
 	// const [error, setError] = useState<string | null>(null);
-	const [formData, setFormData] = useState<SignInFormState>({
-		email: "",
-		password: "",
-	});
+	const [formData, setFormData] = useState<SignInFormState>(signInInitialState);
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 
