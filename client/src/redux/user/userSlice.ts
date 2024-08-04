@@ -2,7 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 
 export type UserState = {
-	currentUser: string | null;
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	currentUser: any;
 	error: string | null;
 	loading: boolean;
 };

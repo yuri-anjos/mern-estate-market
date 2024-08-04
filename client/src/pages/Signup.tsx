@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { OAuthGoogle } from "../components";
 import { useDispatch, useSelector } from "react-redux";
 import { signFailure, signStart, signSuccess } from "../redux/user/userSlice";
+import { IRootState } from "../redux/store";
 
 type SignUpFormState = {
 	username: string;
@@ -19,8 +20,7 @@ const signUpInitialState: SignUpFormState = {
 };
 
 export default function Signup() {
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	const { loading, error } = useSelector((state: any) => state.user);
+	const { loading, error } = useSelector((state: IRootState) => state.user);
 
 	// const [loading, setLoading] = useState<boolean>(false);
 	// const [error, setError] = useState<string | null>(null);

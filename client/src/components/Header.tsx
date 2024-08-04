@@ -1,7 +1,11 @@
 import { FaSearch } from "react-icons/fa";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { IRootState } from "../redux/store";
 
 export default function Header() {
+	const { currentUser } = useSelector((state: IRootState) => state.user);
+
 	return (
 		<header className="w-full bg-slate-200 p-5">
 			<div className="flex justify-between items-center max-w-7xl mx-auto">
@@ -28,15 +32,26 @@ export default function Header() {
 					<li className="hidden sm:inline text-slate-700 hover:underline cursor-pointer">
 						<Link to="/about">About</Link>
 					</li>
-					<li className="text-slate-700 hover:underline cursor-pointer">
-						<Link to="/profile">Profile</Link>
-					</li>
-					<li className="text-slate-700 hover:underline cursor-pointer">
-						<Link to="/signin">Signin</Link>
-					</li>
-					<li className="hidden sm:inline text-slate-700 hover:underline cursor-pointer">
-						<Link to="/signup">Signup</Link>
-					</li>
+					{currentUser ? (
+						<li className="text-slate-700 hover:underline cursor-pointer">
+							<Link to="/profile">
+								<img
+									alt="users_avatar"
+									src={currentUser.avatar}
+									className="w-8 h-8 rounded-full object-cover"
+								></img>
+							</Link>
+						</li>
+					) : (
+						<>
+							<li className="text-slate-700 hover:underline cursor-pointer">
+								<Link to="/signin">Signin</Link>
+							</li>
+							<li className="hidden sm:inline text-slate-700 hover:underline cursor-pointer">
+								<Link to="/signup">Signup</Link>
+							</li>
+						</>
+					)}
 				</ul>
 			</div>
 		</header>
