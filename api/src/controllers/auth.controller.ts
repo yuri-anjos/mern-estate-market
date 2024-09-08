@@ -85,7 +85,8 @@ export default class AuthController {
 			// generating random password
 			const password = Math.random().toString(36).slice(-8) + Math.random().toString(36).slice(-8);
 			const hashedPassword = bcryptjs.hashSync(password, SALT_ROUNDS);
-			const username = name.split("").join("").toLowerCase() + Math.random().toString(36).slice(-8);
+			const username =
+				name.split(" ").join("").toLowerCase() + Math.random().toString(36).slice(-4);
 
 			const newUser = await User.create({
 				username,
