@@ -2,6 +2,7 @@ import express, { NextFunction, Request, Response } from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import { userRouter, authRouter } from "./routes";
+import cookieParser from "cookie-parser";
 
 dotenv.config();
 
@@ -14,10 +15,11 @@ mongoose
 		console.error("Error connecting to MongoDB:", error);
 	});
 
-const port = 3000;
+const port = process.env.PORT ?? 3000;
 const app = express();
 
 app.use(express.json());
+app.use(cookieParser());
 
 app.use("/api/user", userRouter);
 app.use("/api/auth", authRouter);
@@ -38,5 +40,5 @@ app.use((err: any, req: Request, res: Response, next: NextFunction) => {
 });
 
 app.listen(port, () => {
-	console.log(`Server is running on port ${process.env.PORT}!`);
+	console.log(`Server is running on port ${port}!`);
 });

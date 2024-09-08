@@ -7,7 +7,7 @@ import errorHandler from "../utils/error";
 import { createUserToken, getTokenExpirationDate } from "../utils/token.helper";
 import OAuthGoogleDTO from "../dtos/oauth-google.dto";
 
-const SALT_ROUNDS = 10;
+export const SALT_ROUNDS = 10;
 
 export default class AuthController {
 	static async signup(req: Request<{}, {}, SignupDTO>, res: Response, next: NextFunction) {
